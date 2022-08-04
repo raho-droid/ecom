@@ -89,7 +89,7 @@ import AppURL from '../../api/AppURL';
                    <Link to="/profile" className="h4 btn">PROFILE</Link>
                    <Link to="/" onClick={this.logout} className="h4 btn">LOGOUT</Link>
 
-      <Link to="/cart" className="cart-btn"><i className="fa fa-shopping-cart"></i> {this.state.cartCount} Items </Link>
+                   <Link to="/cart" className="cart-btn"><i className="fa fa-shopping-cart"></i> 0 Items </Link>
                     </div> 
                )
 

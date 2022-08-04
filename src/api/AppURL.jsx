@@ -90,7 +90,42 @@ class AppURL {
      static CartCount(product_code){
           return this.BaseURL+"/cartcount/"+product_code;
      }
-      
+     
+     static AddFavourite(product_code,email){
+          return this.BaseURL+"/favourite/"+product_code+"/"+email;
+     }
+
+     static FavouriteList(email){
+          return this.BaseURL+"/favouritelist/"+email;
+     }
+
+     static FavouriteRemove(product_code,email){
+          return this.BaseURL+"/favouriteremove/"+product_code+"/"+email;
+     }
+
+     static CartList(email){
+          return this.BaseURL+"/cartlist/"+email;
+     }
+
+     static RemoveCartList(id){
+          return this.BaseURL+"/removecartlist/"+id;
+     }
+
+     static CartItemPlus(id,quantity,price){
+          return this.BaseURL+"/cartitemplus/"+id+"/"+quantity+"/"+price;
+     }
+
+     static CartItemMinus(id,quantity,price){
+          return this.BaseURL+"/cartitemminus/"+id+"/"+quantity+"/"+price;
+     }
+
+     static CartOrder = this.BaseURL+"/cartorder"
+
+     
+     static OrderListByUser(email){
+          return this.BaseURL+"/orderlistbyuser/"+email;
+     }
+
 }
 
 export default AppURL
