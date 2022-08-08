@@ -183,6 +183,9 @@ class Cart extends Component {
 
 
      render() { 
+          if(!localStorage.getItem('token')){
+               return <Redirect to="/login" />
+          }
 
           const MyList = this.state.ProductData;
           let totalPriceSum=0;

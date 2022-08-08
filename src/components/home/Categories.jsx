@@ -30,7 +30,7 @@ class Categories extends Component {
 
           const CatList = this.state.MenuData;
           const MyView = CatList.map((CatList,i)=>{
-               return <Col key={i.toString()} className="p-0"  xl={2} lg={2} md={2} sm={6} xs={6}>
+               return <Col key={i.toString()} className="p-0" xl={2} lg={2} md={2} sm={6} xs={6}>
                <Link className="text-link" to={"/productcategory/"+CatList.category_name}>    
                <Card className="h-100 w-100 text-center">          
                <Card.Body> 

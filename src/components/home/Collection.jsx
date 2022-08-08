@@ -4,24 +4,33 @@ import AppURL from '../../api/AppURL';
 import axios from 'axios'
 import CollectionLoading from '../PlaceHolder/CollectionLoading';
 import { Link } from 'react-router-dom'
+import Slider from "react-slick";
 
 class Collection extends Component {
 
-     constructor(){
-          super();
+     constructor(props){
+          super(props);
           this.state={
                ProductData:[],
                isLoading:"",
-               mainDiv:"d-none"               
+               mainDiv:"d-none"
           }
+          this.next=this.next.bind(this);
+          this.previous=this.previous.bind(this)
+     }
+     next(){
+          this.slider.slickNext();
+     }
+     previous(){
+          this.slider.slickPrev();
      }
 
 
      componentDidMount(){
-          axios.get(AppURL.ProductListByRemark("COLLECTION")).then(response =>{
+          axios.get(AppURL.ProductListByRemark("NEW")).then(response =>{
                
                this.setState({ProductData:response.data,isLoading:"d-none",
-               mainDiv:" "});         
+               mainDiv:""});         
 
           }).catch(error=>{
 
@@ -29,44 +38,82 @@ class Collection extends Component {
      } 
 
 
+
      render() {
 
-          const CollectionList = this.state.ProductData;
-          const MyView = CollectionList.map((CollectionList,i)=>{
+          const NewList = this.state.ProductData;
+          const MyView = NewList.map((NewList,i)=>{
 
-          if(CollectionList.special_price=="na"){
-               return   <Col className="p-0" xl={3} lg={3} md={3} sm={6} xs={6}>
-                     <Link className="text-link" to={"/productdetails/"+CollectionList.id} >
-               <Card className="image-box card w-100">
-               <img className="center w-75" src={CollectionList.image} />   
+          if(NewList.special_price=="na"){
+               return    <div>
+                <Link className="text-link" to={"/productdetails/"+NewList.id} >
+               <Card className="image-box card">
+               <img className="center" src={NewList.image} />   
                <Card.Body> 
-               <p className="product-name-on-card">{CollectionList.title}</p>
-               <p className="product-price-on-card">Price : ${CollectionList.price}</p>
+               <p className="product-name-on-card">{NewList.title}</p>
+               <p className="product-price-on-card">Price : ${NewList.price}</p>
                     
                </Card.Body>
-               </Card>    
-               </Link>      
-               </Col>
+               </Card>
+               </Link>
+               </div>
 
           }
           else{
 
-               return   <Col className="p-0" xl={3} lg={3} md={3} sm={6} xs={6}>
-                   <Link className="text-link" to={"/productdetails/"+CollectionList.id} >
-               <Card className="image-box card w-100">
-               <img className="center w-75" src={CollectionList.image} />   
+               return    <div>
+                     <Link className="text-link" to={"/productdetails/"+NewList.id} >
+               <Card className="image-box card">
+               <img className="center" src={NewList.image} />   
                <Card.Body> 
-               <p className="product-name-on-card">{CollectionList.title}</p>
-               <p className="product-price-on-card">Price : <strike className="text-secondary">${CollectionList.price}</strike> ${CollectionList.special_price}</p>
+               <p className="product-name-on-card">{NewList.title}</p>
+               <p className="product-price-on-card">Price : <strike className="text-secondary">${NewList.price}</strike> ${NewList.special_price}</p>
                     
                </Card.Body>
-               </Card>   
-               </Link>       
-               </Col>
+               </Card>
+               </Link>
+               </div>
 
           } 
  
           });
+          var settings = {
+               dots: false,
+               infinite: true,
+               speed: 500,
+               autoplay: true,
+               autoplaySpeed:3000,
+               slidesToShow: 4,
+               slidesToScroll: 1,
+               initialSlide: 0,
+               arrows: false,
+               responsive: [
+                 {
+                   breakpoint: 1024,
+                   settings: {
+                     slidesToShow: 4,
+                     slidesToScroll: 1,
+                     infinite: true,
+                     dots: true
+                   }
+                 },
+                 {
+                   breakpoint: 600,
+                   settings: {
+                     slidesToShow: 2,
+                     slidesToScroll: 1,
+                     initialSlide: 2
+                   }
+                 },
+                 {
+                   breakpoint: 480,
+                   settings: {
+                     slidesToShow: 1,
+                     slidesToScroll: 1
+                   }
+                 }
+               ]
+             };
 
 
 
@@ -83,7 +130,9 @@ class Collection extends Component {
           </div>
 
      <Row> 
+     <Slider ref={c=>(this.slider=c)} {...settings}>
                {MyView}
+               </Slider>
      </Row>
                    </Container>
                    </div>

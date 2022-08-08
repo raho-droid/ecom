@@ -60,7 +60,7 @@ class UserLogin extends Component {
                <Row className="text-center">
         <Col className="d-flex justify-content-center" md={6} lg={6} sm={12} xs={12}>
           <Form className="onboardForm" onSubmit={this.formSubmit} >
-               <h4 className="section-title-login"> USER SING IN </h4>
+               <h4 className="section-title-login"> USER SIGN IN </h4>
                
                <input className="form-control m-2" type="email" placeholder="Enter Your Email" onChange={(e)=>{this.setState({email:e.target.value})}} />
 
